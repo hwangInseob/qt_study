@@ -2,6 +2,6 @@
     <qresource prefix="/">
         <file>qml/main.qml</file>
         <file>image/play.png</file>
-        <file>image/stop.png</file>
+        <file>image/pause.png</file>
     </qresource>
 </RCC>

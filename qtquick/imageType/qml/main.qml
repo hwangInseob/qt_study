@@ -4,6 +4,7 @@ import QtQuick.Controls 2.0
 import "../image"
 
 Window {
+    property bool mbIsPlaying : true
     property bool mbtest:true
 
     visible: true
@@ -18,5 +19,22 @@ Window {
         width:100
         height:100
         source:"../image/play.png"
+
+        MouseArea{
+            anchors.fill: parent
+
+            onClicked: {
+                if(mbIsPlaying == true)
+                {
+                    parent.source = "../image/pause.png"
+                    mbIsPlaying = false
+                }
+                else
+                {
+                    parent.source = "../image/play.png"
+                    mbIsPlaying = true
+                }
+            }
+        }
     }
 }
