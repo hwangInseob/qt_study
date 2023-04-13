@@ -1,7 +1,7 @@
 import QtQuick 2.6
 import QtQuick.Window 2.2
 import QtQuick.Controls 2.0
-
+import "."
 
 
 Window {
@@ -133,6 +133,26 @@ Window {
             color:"transparent"
         }
     }
+
+    Label{
+        x:350
+        y:220
+        height:20
+        font.pixelSize: 20
+        text:"customtext module"
+
+        Rectangle{
+            anchors.fill: parent
+            border.color: "red"
+            color:"transparent"
+        }
+    }
+    CustomeText{
+        id:customtext1
+        rTextGeometry: Qt.rect(350, 250, 300, 100)
+        text:"customtext1"
+    }
+
 //    Button{
 //        x:360
 //        y:50
