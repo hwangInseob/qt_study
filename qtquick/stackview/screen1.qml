@@ -4,6 +4,17 @@ import QtQuick.Controls 2.0
 Item {
     width:640
     height:480
+
+    Component.onCompleted:
+    {
+
+    }
+
+    Component.onDestruction:
+    {
+
+    }
+
     Rectangle{
         anchors.fill:parent
         color:"green"
