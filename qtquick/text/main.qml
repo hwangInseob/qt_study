@@ -82,6 +82,57 @@ Window {
         }
     }
 
+
+    Label{
+        x:50
+        y:220
+        height:20
+        font.pixelSize: 20
+        text:"Flickable module"
+
+        Rectangle{
+            anchors.fill: parent
+            border.color: "red"
+            color:"transparent"
+        }
+    }
+    Flickable{
+        x:50
+        y:250
+        width:300
+        height:100
+        contentHeight: text.height < text.contentHeight ? text.contentHeight : text.height
+        Text{
+            id:text
+            width:300
+            height:100
+            text:qsTr("Hello World Hello
+            World Hello World Hello World
+            Hello World Hello World Hello
+            World Hello World Hello World Hello World Hello World Hello World")
+            font.pixelSize:30
+    //        elide: Text.ElideRight          // display "..." over text
+            wrapMode: Text.WrapAnywhere     //line change any character
+    //        wrapMode: Text.WordWrap         //line change on word
+
+
+
+            Rectangle{
+                anchors{
+                    fill: parent
+                }
+                border.color: "green"
+                color:"transparent"
+            }
+        }
+        Rectangle{
+            anchors{
+                fill: parent
+            }
+            border.color: "red"
+            color:"transparent"
+        }
+    }
 //    Button{
 //        x:360
 //        y:50
