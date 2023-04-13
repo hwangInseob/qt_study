@@ -11,6 +11,62 @@ Window {
     StackView{
         id:stackView
         anchors.fill: parent
+
+        replaceEnter: Transition {
+            PropertyAnimation{
+                property:"y"
+                from:-480
+                to:0
+                duration:500
+            }
+        }
+
+        replaceExit: Transition {
+            PropertyAnimation{
+                property:"y"
+                from:0
+                to:480
+                duration:500
+            }
+        }
+
+        pushEnter: Transition {
+            PropertyAnimation{
+                property:"y"
+                from:-480
+                to:0
+                duration:500
+            }
+        }
+
+        pushExit: Transition {
+            PropertyAnimation{
+                property:"y"
+                from:0
+                to:480
+                duration:500
+            }
+        }
+
+        popEnter: Transition {
+            PropertyAnimation{
+                property:"y"
+                from:480
+                to:0
+                duration:500
+            }
+        }
+
+        popExit: Transition {
+            PropertyAnimation{
+                property:"y"
+                from:0
+                to:-480
+                duration:500
+            }
+        }
+
+
         initialItem: Item {
             Rectangle{
                 anchors.fill:parent
@@ -42,5 +98,4 @@ Window {
             }
         }
     }
-
 }
