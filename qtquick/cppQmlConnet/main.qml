@@ -1,6 +1,8 @@
 import QtQuick 2.9
 import QtQuick.Window 2.2
 import QtQuick.Controls 2.0
+import ConnectEvent 1.0
+import "."
 
 Window {
     property bool mbImageClicekd:true
@@ -10,6 +12,11 @@ Window {
     width: 640
     height: 480
     title: qsTr("Hello World")
+
+    ConnectEvt
+    {
+        id:connectEvent
+    }
 
     function qmlSlotTestData(data){
         console.log("qmlSlotTestData data:" + data)
@@ -96,6 +103,19 @@ Window {
                 onClicked:
                 {
                     qmlSignalIntData(11)
+                }
+            }
+
+            Button
+            {
+                id:invokeButton
+                anchors.top:stringEmitButton.bottom
+                anchors.topMargin: 30
+                anchors.horizontalCenter: parent.horizontalCenter
+                text:"invoke cpp method"
+                onClicked:
+                {
+                    connectEvent.getInstance().invokableMethod();
                 }
             }
         }

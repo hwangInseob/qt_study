@@ -9,6 +9,7 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     QQmlApplicationEngine engine;
+    ConnectEvent* event = ConnectEvent::getInstance();
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {
@@ -17,7 +18,6 @@ int main(int argc, char *argv[])
     }, Qt::QueuedConnection);
     engine.load(url);
 
-    ConnectEvent* event = new ConnectEvent();
     QObject *root = engine.rootObjects()[0];
     event->setWindow(qobject_cast<QQuickWindow*>(root));
 

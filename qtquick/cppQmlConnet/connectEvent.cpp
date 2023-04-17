@@ -2,7 +2,8 @@
 
 ConnectEvent::ConnectEvent()
 {
-
+    qDebug() << "ConnectEvent Constructor";
+    qmlRegisterType<ConnectEvent>("ConnectEvent",1,0,"ConnectEvt");
 }
 
 ConnectEvent::~ConnectEvent()
@@ -47,4 +48,9 @@ void ConnectEvent::cppSlotIntData(QVariant intData)
 {
     int tmp = intData.toInt();
     qDebug() << Q_FUNC_INFO << tmp;
+}
+
+void ConnectEvent::invokableMethod()
+{
+    qDebug() << "invoked CPP method";
 }
