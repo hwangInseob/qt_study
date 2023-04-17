@@ -22,6 +22,9 @@ private:
 signals:
     void cppSignalTestData(QVariant var);
 
+public slots:
+    void cppSlotStringData(QVariant stringData);
+    void cppSlotIntData(QVariant intData);
 };
 
 #endif // CONNECTEVENT_H

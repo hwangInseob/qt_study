@@ -15,6 +15,9 @@ Window {
         console.log("qmlSlotTestData data:" + data)
     }
 
+    signal qmlSignalStringData(var str)
+    signal qmlSignalIntData(var i)
+
     StackView
     {
         id:stackView
@@ -60,14 +63,39 @@ Window {
             }
             Button
             {
+                id:previousButton
                 anchors.top:testText.bottom
                 anchors.left: nextButton.right
                 anchors.leftMargin: 30
                 text:"go screen2"
                 onClicked:
                 {
-                    "push screen2"
                     stackView.push(Qt.resolvedUrl("qrc:/screen2.qml"))
+                }
+            }
+            Button
+            {
+                id:stringEmitButton
+                anchors.top:previousButton.bottom
+                anchors.topMargin: 30
+                anchors.horizontalCenter: parent.horizontalCenter
+                text:"string signal emit"
+                onClicked:
+                {
+                    qmlSignalStringData("string data signal")
+                }
+            }
+            Button
+            {
+                id:intEmitButton
+                anchors.top:previousButton.bottom
+                anchors.topMargin: 30
+                anchors.left: stringEmitButton.right
+                anchors.leftMargin: 30
+                text:"int signal emit"
+                onClicked:
+                {
+                    qmlSignalIntData(11)
                 }
             }
         }
