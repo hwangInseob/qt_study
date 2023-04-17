@@ -68,6 +68,9 @@ Window {
 
 
         initialItem: Item {
+
+            objectName: "mainscreen"
+
             Rectangle{
                 anchors.fill:parent
                 color:"red"

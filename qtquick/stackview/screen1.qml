@@ -5,15 +5,7 @@ Item {
     width:640
     height:480
 
-    Component.onCompleted:
-    {
-
-    }
-
-    Component.onDestruction:
-    {
-
-    }
+    objectName: "screen1"
 
     Rectangle{
         anchors.fill:parent
