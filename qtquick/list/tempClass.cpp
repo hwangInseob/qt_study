@@ -1,7 +1,7 @@
 #include "tempClass.h"
 
-tempClass::tempClass(QObject *parent) : QObject(parent)
-  ,title("")
+tempClass::tempClass() :
+  title("")
   ,buttonText("")
   ,information("")
 {

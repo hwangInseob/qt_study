@@ -3,7 +3,6 @@
 ConnectEvent::ConnectEvent()
 {
     qDebug() << "ConnectEvent Constructor";
-    qmlRegisterType<ConnectEvent>("ConnectEvent",1,0,"ConnectEvent");
     initTestList();
 }
 
@@ -82,6 +81,14 @@ QString ConnectEvent::getListInforamtion(int index)
     QString information("");
     information = mTestList.at(index).getInformation();
     return information;
+}
+
+void ConnectEvent::deleteListItem(int index)
+{
+    std::vector<tempClass>::iterator it;
+    it = mTestList.begin();
+    it = it + index;
+    mTestList.erase(it);
 }
 
 void ConnectEvent::initTestList()

@@ -8,14 +8,8 @@ Item {
     height:600
     // ![0]
 
-    // [1] CPP connectEvent Class Instance Create
-    ConnectEvent {
-        id:connectEvent
-    }
-    // ![1}
-
     Component.onCompleted: {
-        testText.text = connectEvent.getListInforamtion(mListClickIndex)
+        testText.text = ConnectEvent.getListInforamtion(mListClickIndex)
     }
 
     Component.onDestruction: {

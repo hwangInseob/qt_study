@@ -8,7 +8,8 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     QQmlApplicationEngine engine;
-    ConnectEvent* event = new ConnectEvent();
+    ConnectEvent* event = ConnectEvent::getInstance();
+    qmlRegisterSingletonType<ConnectEvent>("ConnectEvent",1,0,"ConnectEvent",&ConnectEvent::qmlInstance);
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {

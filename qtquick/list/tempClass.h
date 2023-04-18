@@ -3,11 +3,10 @@
 
 #include <QObject>
 
-class tempClass : public QObject
+class tempClass
 {
-    Q_OBJECT;
 public:
-    tempClass(QObject *parent = nullptr);
+    tempClass();
     tempClass(const tempClass& rhs);
     ~tempClass();
 

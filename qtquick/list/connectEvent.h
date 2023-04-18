@@ -9,7 +9,7 @@
 class ConnectEvent : public QObject
 {
 public:
-    Q_OBJECT;
+    Q_OBJECT
 
 public:
     ConnectEvent();
@@ -25,6 +25,12 @@ public:
 
         return mInstance;
     }
+
+    static QObject* qmlInstance(QQmlEngine *engine, QJSEngine *scriptEngine)
+    {
+        return ConnectEvent::getInstance();
+    }
+
     void cppSignalToQmlSlot();
     void setWindow(QQuickWindow* window);
     void initTestList();
@@ -34,6 +40,7 @@ public:
     Q_INVOKABLE QString getListTitle(int index);
     Q_INVOKABLE QString getListButtonText(int index);
     Q_INVOKABLE QString getListInforamtion(int index);
+    Q_INVOKABLE void deleteListItem(int index);
 
 private:
     QQuickWindow* mMainView;

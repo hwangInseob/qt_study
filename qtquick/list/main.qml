@@ -13,9 +13,9 @@ Window {
     height: 600
     title: qsTr("Hello World")
 
-    ConnectEvent{
-        id:connectEvent
-    }
+//    ConnectEvent{
+//        id:connectEvent
+//    }
 
     Component.onCompleted: {
 //        listView.model.append({"list_text":"test_text","list_button_text":"test button"})
@@ -25,10 +25,10 @@ Window {
 //        listView.model.append({"list_text":"test_text","list_button_text":"test button"})
 //        listView.model.append({"list_text":"test_text","list_button_text":"test button"})
 
-        for(var i = 0 ; i < connectEvent.getListSize();i++)
+        for(var i = 0 ; i < ConnectEvent.getListSize();i++)
         {
-            listView.model.append({"list_text":connectEvent.getListTitle(i),
-                                      "list_button_text":connectEvent.getListButtonText(i)
+            listView.model.append({"list_text":ConnectEvent.getListTitle(i),
+                                      "list_button_text":ConnectEvent.getListButtonText(i)
                                   })
         }
     }
@@ -110,6 +110,11 @@ Window {
                 anchors.right:parent.right
                 text:list_button_text
                 z: 1
+
+                onClicked: {
+                    ConnectEvent.deleteListItem(index)
+                    listView.model.remove(index)
+                }
             }
             Rectangle{
                 id:line
