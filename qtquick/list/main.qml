@@ -6,10 +6,11 @@ import ConnectEvent 1.0
 Window {
     property bool mbImageClicked:true
     property int mCount:0
+    property int mListClickIndex:0
 
     visible: true
-    width: 640
-    height: 480
+    width: 800
+    height: 600
     title: qsTr("Hello World")
 
     ConnectEvent{
@@ -108,6 +109,7 @@ Window {
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.right:parent.right
                 text:list_button_text
+                z: 1
             }
             Rectangle{
                 id:line
@@ -116,20 +118,35 @@ Window {
                 height:1
                 color:"black"
             }
+            MouseArea{
+                id:listMouseArea
+                anchors.fill:parent
+                onClicked: {
+                    mListClickIndex = index
+                    stackView.push(Qt.resolvedUrl("qrc:/listInfo.qml"))
+                }
+            }
         }
     }
 
-    ListView{
-        id:listView
-        anchors.fill:parent
-//        model:model
-//        delegate:Delegate
-        model:ListModel{}
-        delegate:secondContactDelegate
-        highlight:Rectangle{
-            color:"lightsteelblue"
-            radius:5
+    StackView{
+        id:stackView
+        anchors.fill: parent
+
+        initialItem: Item {
+            ListView{
+                id:listView
+                anchors.fill:parent
+        //        model:model
+        //        delegate:Delegate
+                model:ListModel{}
+                delegate:secondContactDelegate
+                highlight:Rectangle{
+                    color:"lightsteelblue"
+                    radius:5
+                }
+                focus:true
+            }
         }
-        focus:true
     }
 }

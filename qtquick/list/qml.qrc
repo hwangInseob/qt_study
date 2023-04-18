@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
+        <file>listInfo.qml</file>
     </qresource>
 </RCC>
