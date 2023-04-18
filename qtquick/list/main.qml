@@ -12,13 +12,24 @@ Window {
     height: 480
     title: qsTr("Hello World")
 
+    ConnectEvent{
+        id:connectEvent
+    }
+
     Component.onCompleted: {
-        listView.model.append({"list_text":"test_text","list_button_text":"test button"})
-        listView.model.append({"list_text":"test_text","list_button_text":"test button"})
-        listView.model.append({"list_text":"test_text","list_button_text":"test button"})
-        listView.model.append({"list_text":"test_text","list_button_text":"test button"})
-        listView.model.append({"list_text":"test_text","list_button_text":"test button"})
-        listView.model.append({"list_text":"test_text","list_button_text":"test button"})
+//        listView.model.append({"list_text":"test_text","list_button_text":"test button"})
+//        listView.model.append({"list_text":"test_text","list_button_text":"test button"})
+//        listView.model.append({"list_text":"test_text","list_button_text":"test button"})
+//        listView.model.append({"list_text":"test_text","list_button_text":"test button"})
+//        listView.model.append({"list_text":"test_text","list_button_text":"test button"})
+//        listView.model.append({"list_text":"test_text","list_button_text":"test button"})
+
+        for(var i = 0 ; i < connectEvent.getListSize();i++)
+        {
+            listView.model.append({"list_text":connectEvent.getListTitle(i),
+                                      "list_button_text":connectEvent.getListButtonText(i)
+                                  })
+        }
     }
 
     ListModel{

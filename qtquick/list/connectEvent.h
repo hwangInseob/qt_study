@@ -3,6 +3,8 @@
 
 #include <QQuickView>
 #include <QObject>
+#include <vector>
+#include <tempClass.h>
 
 class ConnectEvent : public QObject
 {
@@ -25,11 +27,17 @@ public:
     }
     void cppSignalToQmlSlot();
     void setWindow(QQuickWindow* window);
-
+    void initTestList();
     Q_INVOKABLE void invokableMethod();
+
+    Q_INVOKABLE int getListSize();
+    Q_INVOKABLE QString getListTitle(int index);
+    Q_INVOKABLE QString getListButtonText(int index);
+    Q_INVOKABLE QString getListInforamtion(int index);
+
 private:
     QQuickWindow* mMainView;
-
+    std::vector<tempClass> mTestList;
 signals:
     void cppSignalTestData(QVariant var);
 

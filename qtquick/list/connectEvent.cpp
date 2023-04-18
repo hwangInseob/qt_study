@@ -4,6 +4,7 @@ ConnectEvent::ConnectEvent()
 {
     qDebug() << "ConnectEvent Constructor";
     qmlRegisterType<ConnectEvent>("ConnectEvent",1,0,"ConnectEvent");
+    initTestList();
 }
 
 ConnectEvent::~ConnectEvent()
@@ -53,4 +54,44 @@ void ConnectEvent::cppSlotIntData(QVariant intData)
 void ConnectEvent::invokableMethod()
 {
     qDebug() << "invoked CPP method";
+}
+
+int ConnectEvent::getListSize()
+{
+    int listSize = 0;
+    listSize = mTestList.size();
+    return listSize;
+}
+
+QString ConnectEvent::getListTitle(int index)
+{
+    QString listTitle("");
+    listTitle = mTestList.at(index).getTitle();
+    return listTitle;
+}
+
+QString ConnectEvent::getListButtonText(int index)
+{
+    QString buttonText("");
+    buttonText = mTestList.at(index).getButtonText();
+    return buttonText;
+}
+
+QString ConnectEvent::getListInforamtion(int index)
+{
+    QString information("");
+    information = mTestList.at(index).getInformation();
+    return information;
+}
+
+void ConnectEvent::initTestList()
+{
+    tempClass tmp;
+    for(int i = 0 ; i < 10; i++)
+    {
+        tmp.setTitle("TestTitle" + QString::number(i));
+        tmp.setButtonText("buttenText" + QString::number(i));
+        tmp.setInformation("Test Information" + QString::number(i));
+        mTestList.push_back(tmp);
+    }
 }
