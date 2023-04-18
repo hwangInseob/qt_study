@@ -2,3 +2,5 @@
 *.user
 *.890c49c
 *.o
+*.stash
+moc*
