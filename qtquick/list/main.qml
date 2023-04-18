@@ -12,6 +12,15 @@ Window {
     height: 480
     title: qsTr("Hello World")
 
+    Component.onCompleted: {
+        listView.model.append({"list_text":"test_text","list_button_text":"test button"})
+        listView.model.append({"list_text":"test_text","list_button_text":"test button"})
+        listView.model.append({"list_text":"test_text","list_button_text":"test button"})
+        listView.model.append({"list_text":"test_text","list_button_text":"test button"})
+        listView.model.append({"list_text":"test_text","list_button_text":"test button"})
+        listView.model.append({"list_text":"test_text","list_button_text":"test button"})
+    }
+
     ListModel{
         id:model
         ListElement{
@@ -67,11 +76,45 @@ Window {
         }
     }
 
+    Component{
+        id:secondContactDelegate
+        Item{
+            width:800
+            height:100
+            Text {
+                id: listView_text
+                anchors.left:parent.left
+                anchors.leftMargin: 50
+                anchors.verticalCenter: parent.verticalCenter
+                text:list_text
+            }
+            Button
+            {
+                id:listView_Button
+                width:100
+                height:40
+                anchors.rightMargin: 30
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.right:parent.right
+                text:list_button_text
+            }
+            Rectangle{
+                id:line
+                width:parent.width
+                anchors.bottom:parent.bottom
+                height:1
+                color:"black"
+            }
+        }
+    }
+
     ListView{
         id:listView
         anchors.fill:parent
-        model:model
-        delegate:contactDelegate
+//        model:model
+//        delegate:Delegate
+        model:ListModel{}
+        delegate:secondContactDelegate
         highlight:Rectangle{
             color:"lightsteelblue"
             radius:5
