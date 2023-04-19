@@ -243,12 +243,74 @@ Window {
                 //------------------------------
                 //-         scrollbar          -
                 //------------------------------
-                ScrollBar.vertical: ScrollBar{
+//                ScrollBar.vertical: ScrollBar{
+//                    width:20
+//                    policy:ScrollBar.AlwaysOn
+//                    contentItem: Rectangle{
+//                        radius: 100
+//                        color:"red"
+//                    }
+//                }
+                Flickable{
+                    id:flickable
+                    x:780
+                    y:0
                     width:20
-                    policy:ScrollBar.AlwaysOn
-                    contentItem: Rectangle{
-                        radius: 100
+                    height:500
+                    Rectangle{
+                        id: scrollBarImage
+                        y: {
+                            var yValue = listView.visibleArea.yPosition * flickable.height //Flickable 의 전체 높이에서 yposition만큼의 비율을 곱해준다.(이미지의 y좌표는 스크롤이 높이만큼만 스크롤이 가능하기 때문에 Flickable 의 높이만큼)
+                            if(yValue <= parent.y)
+                            {
+                                yValue = parent.y
+                            }
+                            else if(yValue >= (parent.height - height))
+                            {
+                                yValue = parent.height - height
+                            }
+
+                            return yValue
+                        }
                         color:"red"
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        radius: 100
+                        width : 10
+//                        height:flickable.height - (flickable.height * (1 - listView.visibleArea.heightRatio))//스크롤바의 최대 높이는 flickable의 높이 입니다. 그렇기 때문에 flickable의 높이에서 높이 비율만큼 빼줍니다.
+                        height:flickable.height * listView.visibleArea.heightRatio
+                        property bool isClicked : false
+
+                        onYChanged: {
+                            if(isClicked)
+                            {
+                                listView.contentY = (scrollBarImage.y / flickable.height) * listView.contentHeight
+                            }
+
+                            console.log("listView.visibleArea.yPosition:" + listView.visibleArea.yPosition)
+                            console.log("listView.visibleArea.heightRatio:" + listView.visibleArea.heightRatio)
+                            console.log("scrollBarImage.y" + y)
+                      }
+
+                        MouseArea{
+                            anchors.fill: parent
+
+                            onPressed: {
+                                console.log("scrollBarImage mouseArea PRESSED")
+                                scrollBarImage.isClicked = true
+
+
+                                console.log("(1) : " + (flickable.height - (flickable.height * (1 - listView.visibleArea.heightRatio))))
+                                console.log("(2) : " + (flickable.height * listView.visibleArea.heightRatio))
+                            }
+                            onReleased: {
+                                console.log("scrollBarImage mouseArea RELEASED")
+                                scrollBarImage.isClicked = false
+                            }
+
+                            drag.target: scrollBarImage
+                            drag.minimumY:flickable.y
+                            drag.maximumY:flickable.height - scrollBarImage.height
+                        }
                     }
                 }
             }
