@@ -41,6 +41,7 @@ public:
     Q_INVOKABLE QString getListButtonText(int index);
     Q_INVOKABLE QString getListInforamtion(int index);
     Q_INVOKABLE void deleteListItem(int index);
+    Q_INVOKABLE void deleteListItemList(QList<int> index);
 
 private:
     QQuickWindow* mMainView;

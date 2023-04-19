@@ -7,6 +7,9 @@ Window {
     property bool mbImageClicked:true
     property int mCount:0
     property int mListClickIndex:0
+    property bool mbIsEditMode:false
+
+    property variant arrDeleteItem:[]
 
     visible: true
     width: 800
@@ -28,7 +31,8 @@ Window {
         for(var i = 0 ; i < ConnectEvent.getListSize();i++)
         {
             listView.model.append({"list_text":ConnectEvent.getListTitle(i),
-                                      "list_button_text":ConnectEvent.getListButtonText(i)
+                                      "list_button_text":ConnectEvent.getListButtonText(i),
+                                      "checkedValue":false
                                   })
         }
     }
@@ -93,9 +97,28 @@ Window {
         Item{
             width:800
             height:100
+
+            CheckBox{
+                id:checkboxDeleteItem
+                anchors.left: parent.left
+                anchors.leftMargin: 30
+                anchors.verticalCenter: parent.verticalCenter
+                visible: mbIsEditMode ? true : false
+                z:1
+
+                onCheckedChanged: {
+                    checkedValue = checked
+                    console.log("index " + index + " : checked")
+                }
+
+                onVisibleChanged: {
+                    checked = false
+                }
+            }
+
             Text {
                 id: listView_text
-                anchors.left:parent.left
+                anchors.left: mbIsEditMode ? checkboxDeleteItem.right : parent.left
                 anchors.leftMargin: 50
                 anchors.verticalCenter: parent.verticalCenter
                 text:list_text
@@ -139,9 +162,74 @@ Window {
         anchors.fill: parent
 
         initialItem: Item {
+            Rectangle{
+                id:topbar
+                width:parent.width
+                height:80
+                color:"white"
+                z:100
+                Button{
+                    id:editButton
+                    width:80
+                    height:40
+                    anchors.right: parent.right
+                    anchors.rightMargin: 30
+                    anchors.top:parent.top
+                    anchors.topMargin: 20
+
+                    text:"edit"
+
+                    onClicked: {
+                        if(mbIsEditMode)
+                        {
+                            text="edit"
+                            mbIsEditMode = false
+                        }
+                        else
+                        {
+                            text="cancle"
+                            mbIsEditMode = true
+                        }
+                    }
+                }
+
+                Button{
+                    id:deleteButton
+                    width:80
+                    height:40
+                    anchors.right: editButton.left
+                    anchors.rightMargin: 10
+                    anchors.top:parent.top
+                    anchors.topMargin: 20
+                    visible: mbIsEditMode
+                    text:"delete"
+
+                    onClicked: {
+                        for(var i = listView.count-1 ; i >= 0 ; i--)
+                        {
+                            var isChecked = listView.model.get(i).checkedValue
+                            if(isChecked)
+                            {
+                                listView.model.remove(i)
+                                arrDeleteItem.push(i)
+                                console.log("checked Index : " + i)
+                            }
+                        }
+
+                        ConnectEvent.deleteListItemList(arrDeleteItem)
+                        var a = []
+                        arrDeleteItem = a
+                        editButton.text="edit"
+                        mbIsEditMode = false
+                    }
+                }
+            }
+
             ListView{
                 id:listView
-                anchors.fill:parent
+                width: parent.width
+                height: parent.height - 40
+                anchors.top: topbar.bottom
         //        model:model
         //        delegate:Delegate
                 model:ListModel{}

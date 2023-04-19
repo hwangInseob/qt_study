@@ -89,6 +89,16 @@ void ConnectEvent::deleteListItem(int index)
     it = mTestList.begin();
     it = it + index;
     mTestList.erase(it);
+    qDebug() << Q_FUNC_INFO << "end";
+}
+
+void ConnectEvent::deleteListItemList(QList<int> index)
+{
+    qDebug() << Q_FUNC_INFO << "called";
+    for(int i = 0 ; i < index.count() ; i++ )
+    {
+        deleteListItem(index.at(i));
+    }
 }
 
 void ConnectEvent::initTestList()
