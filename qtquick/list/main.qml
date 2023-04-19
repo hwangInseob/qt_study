@@ -228,7 +228,7 @@ Window {
             ListView{
                 id:listView
                 width: parent.width
-                height: parent.height - 40
+                height: parent.height - 100
                 anchors.top: topbar.bottom
         //        model:model
         //        delegate:Delegate
@@ -239,6 +239,18 @@ Window {
                     radius:5
                 }
                 focus:true
+
+                //------------------------------
+                //-         scrollbar          -
+                //------------------------------
+                ScrollBar.vertical: ScrollBar{
+                    width:20
+                    policy:ScrollBar.AlwaysOn
+                    contentItem: Rectangle{
+                        radius: 100
+                        color:"red"
+                    }
+                }
             }
         }
     }
