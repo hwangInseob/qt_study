@@ -41,6 +41,11 @@ Window {
         console.log(ConnectEvent.SATURDAY)
     }
 
+    function testFunc(str, i)
+    {
+        console.log("str : " + str + " / i : " + i)
+    }
+
     ListModel{
         id:model
         ListElement{
@@ -225,6 +230,20 @@ Window {
                         arrDeleteItem = a
                         editButton.text="edit"
                         mbIsEditMode = false
+                    }
+                }
+
+                Button{
+                    width:80
+                    height:40
+                    anchors.right: deleteButton.left
+                    anchors.rightMargin: 10
+                    anchors.top:parent.top
+                    anchors.topMargin: 20
+                    text:"func"
+
+                    onClicked: {
+                        ConnectEvent.invokableMethod()
                     }
                 }
             }
