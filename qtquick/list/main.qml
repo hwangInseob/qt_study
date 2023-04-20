@@ -166,6 +166,76 @@ Window {
         }
     }
 
+    //-------------------------------------
+    //-             pop up                -
+    //-------------------------------------
+    Popup{
+        id:twoButtonPopup
+        width:parent.width
+        height:parent.height
+        dim:true
+
+        opacity: 0.3
+
+        background:Rectangle{
+            anchors.fill: parent
+            color:"gray"
+            MouseArea{
+                anchors.fill: parent
+
+                onClicked: {
+                    twoButtonPopup.close()
+                }
+            }
+        }
+        closePolicy: Popup.CloseOnPressOutside
+        leftPadding: 0
+        rightPadding: 0
+        topPadding: 0
+        bottomPadding: 0
+
+        Text {
+            anchors.centerIn: parent
+            text: qsTr("text")
+            color:"black"
+            font.pixelSize: 30
+            font.bold: true
+        }
+
+        Button
+        {
+            id:nextScreenButton
+            x: (parent.width/2 - width - (closeButton.leftMargin/2))
+            y: (parent.height/2 - height)
+            width:190
+            height:50
+            text:"go next screen"
+            onClicked:{
+                twoButtonPopup.close()
+                console.log("clicked nextScreenButton")
+            }
+        }
+
+        Button
+        {
+            id:closeButton
+
+            property int leftMargin : 30
+
+            anchors.left: nextScreenButton.right
+            anchors.top: nextScreenButton.top
+            anchors.leftMargin: leftMargin
+            width:190
+            height:50
+            text:"close"
+            onClicked:{
+                twoButtonPopup.close()
+                console.log("clicked closeButton")
+            }
+        }
+    }
+
+
     StackView{
         id:stackView
         anchors.fill: parent
@@ -244,6 +314,7 @@ Window {
 
                     onClicked: {
                         ConnectEvent.invokableMethod()
+                        twoButtonPopup.open()
                     }
                 }
             }
