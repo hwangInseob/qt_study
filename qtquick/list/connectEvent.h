@@ -33,6 +33,7 @@ public:
 
     void cppSignalToQmlSlot();
     void setWindow(QQuickWindow* window);
+    QQuickWindow* getWindow();
     void initTestList();
     Q_INVOKABLE void invokableMethod();
 
@@ -43,6 +44,7 @@ public:
     Q_INVOKABLE void deleteListItem(int index);
     Q_INVOKABLE void deleteListItemList(QList<int> index);
 
+    void callQmlFuncFromCpp();
 private:
     QQuickWindow* mMainView;
     std::vector<tempClass> mTestList;

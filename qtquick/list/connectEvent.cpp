@@ -33,6 +33,11 @@ void ConnectEvent::setWindow(QQuickWindow *window)
     cppSignalToQmlSlot();
 }
 
+QQuickWindow* ConnectEvent::getWindow()
+{
+    return mMainView;
+}
+
 ///
 /// \brief ConnectEvent::cppSlotStringData
 /// \param stringData
@@ -53,6 +58,9 @@ void ConnectEvent::cppSlotIntData(QVariant intData)
 void ConnectEvent::invokableMethod()
 {
     qDebug() << "invoked CPP method";
+    QObject* rootObject = qobject_cast<QObject*>(getWindow());
+    QMetaObject::invokeMethod(rootObject,"testFunc",Q_ARG(QVariant,"test String"), Q_ARG(QVariant,10));
+
 }
 
 int ConnectEvent::getListSize()
@@ -112,3 +120,5 @@ void ConnectEvent::initTestList()
         mTestList.push_back(tmp);
     }
 }
+
+
