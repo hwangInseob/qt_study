@@ -35,6 +35,10 @@ Window {
                                       "checkedValue":false
                                   })
         }
+
+        console.log(ConnectEvent.MONDAY)
+        console.log(ConnectEvent.SUNDAY)
+        console.log(ConnectEvent.SATURDAY)
     }
 
     ListModel{

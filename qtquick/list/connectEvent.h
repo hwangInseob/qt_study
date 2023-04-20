@@ -10,7 +10,7 @@ class ConnectEvent : public QObject
 {
 public:
     Q_OBJECT
-
+    Q_ENUMS(WEEK)
 public:
     ConnectEvent();
     ~ConnectEvent();
@@ -52,5 +52,16 @@ signals:
 public slots:
     void cppSlotStringData(QVariant stringData);
     void cppSlotIntData(QVariant intData);
+
+public:
+    enum WEEK{
+        SUNDAY = 0,
+        MONDAY,
+        TUESDAY,
+        WEDNESDAY,
+        THURSDAY,
+        FRIDAY,
+        SATURDAY
+    };
 };
 #endif // CONNECTEVENT_H
